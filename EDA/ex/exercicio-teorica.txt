@@ -1,0 +1,29 @@
+1.
+
+Q = {7;3;8;9} -> Q = {9; 8; 3; 7} : Inverter a função
+
+-----
+  9 |
+-----
+  8 |
+-----   -> {9; 8; 3; 7}
+  3 |
+-----
+  7 |
+-----
+
+invert(Queue Q){
+    stack S = createstack(100);
+    while(!IsEmpty(Q)){
+        Push(Dequeue(Q), S);
+    }
+    makeEmpty(Q);
+    while(!IsEmpty(S)){
+        Enqueue(Pop(S), Q);
+    }
+    return Q;
+}
+
+2.
+
+
