@@ -9,7 +9,7 @@ typedef struct Node *PtrToNode;
 typedef PtrToNode List;
 typedef PtrToNode Position;
 
-List CreateList(List L);
+List CreateList();
 List MakeEmptyList( List L );
 bool IsEmptyList( List L );
 bool IsLast( Position P, List L );
