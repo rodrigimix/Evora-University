@@ -124,4 +124,18 @@ ElementType Retrieve(Position P)
     return P->Element;
 }
 
-void PrintList(List L);
+void PrintList(List L){
+    Position P = Header( L );
+
+    if( IsEmpty( L ) )
+        printf( "Empty list\n" );
+    else
+    {
+        do
+        {
+            P = Advance( P );
+            printf( "%d ", Retrieve( P ) );
+        } while( !IsLast( P, L ) );
+        printf( "\n" );
+    }
+}
