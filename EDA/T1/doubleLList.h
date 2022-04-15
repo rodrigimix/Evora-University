@@ -4,8 +4,12 @@
 #include <stdio.h>
 typedef int ElementType;
 
+struct DNode;
+typedef struct DNode *PtrToDNode;
+typedef PtrToDNode DPosition;
+typedef PtrToDNode DList;
 
-DList CreateDList( void );
+DList CreateDList();
 void MakeEmptyDList( DList L);
 int SizeDList(DList L);
 DPosition DHeader(DList L);
