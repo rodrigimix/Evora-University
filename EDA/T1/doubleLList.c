@@ -9,6 +9,12 @@ struct DNode
     DPosition Prev;
 };
 
+struct DNode *Head = NULL;
+
+struct DNode *Last = NULL;
+
+struct DNode *Current = NULL;
+
 DList CreateDList()
 {
     DList L;
@@ -21,7 +27,7 @@ DList CreateDList()
     return L;
 }
 
-void MakeEmptyDList(DList L)
+void MakeEmptyDList(DList L) //REVIEW
 {
     DPosition P = L;
     while (P != NULL)
@@ -34,27 +40,29 @@ void MakeEmptyDList(DList L)
 int SizeDList(DList L)
 {
     int count = 0;
-    while (L != NULL)
+    Current = Head;
+    while (Current != NULL)
     {
         count++;
-        L = L->Next;
+        Current = Current->Next;
     }
     return count;
 }
 
 DPosition DHeader(DList L)
 {
-    return L;
+    return Head;
 }
 
 DPosition DFooter(DList L)
 {
-    return L->Next;
+    return Last;
 }
 
 int IsEmptyDList(DList L){
-    if(DFooter == NULL)
+    if(DHeader == NULL)
         return 1; // Verdade
     return 0; // Falso
 }
+
 
