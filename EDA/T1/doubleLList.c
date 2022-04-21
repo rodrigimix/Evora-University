@@ -174,3 +174,19 @@ DPosition FindDList(ElementType e)
         printf("Item not found\n");
     }
 }
+
+void DeleteElement(ElementType e, DList L){
+    DPosition F, F1, F2;
+
+    F = FindDList(e);
+    if (F == NULL){
+        F1 = F->Prev;
+        F2 = F->Next;
+        F1->Next = F->Next;
+
+        if(F2 == NULL)
+            F2->Prev = F->Prev;
+    }
+    else
+        FatalError("Item not found\n");
+}
