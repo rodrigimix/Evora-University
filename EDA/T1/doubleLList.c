@@ -34,13 +34,16 @@ DList CreateDList()
     return L;
 }
 
-int SizeDList(DList L){
+int SizeDList(DList L)
+{
     return L->size;
 }
-DPosition DHeader(DList L){
+DPosition DHeader(DList L)
+{
     return L->Head;
 }
-DPosition DFooter(DList L){
+DPosition DFooter(DList L)
+{
     return L->Tail;
 }
 
@@ -48,13 +51,47 @@ void InsertDList(ElementType X, DPosition P, DList L)
 {
     DPosition RT = malloc(sizeof(struct DNode));
 
+    if (RT == NULL)
+    {
+        printf("Out of memory\n");
+        exit(1);
+    }
     RT->Element = X;
 
     RT->Next = P->Next;
     RT->Prev = P;
     P->Next->Prev = RT;
     P->Next = RT;
-    L->size++; 
+    L->size++;
+}
+
+void addDList(ElementType X, DList L)
+{
+    DPosition PJ = DFooter(L);
+
+    PJ = PJ->Prev;
+   InsertDList(X, PJ, L);
+    L->size++;
+}
+
+DPosition FindDList(ElementType e, DList L)
+{
+    DPosition P = DHeader(L);
+
+    if (P == NULL)
+    {
+        printf("Empty List");
+        exit(1);
+    }
+    while (P != L->Tail)
+    {
+        if (P->Element == e)
+        {
+            return P;
+        }
+        P = Advance(P);
+    }
+    return NULL;
 }
 
 void PrintDList(char *name, DList L)
@@ -87,7 +124,10 @@ DPosition Back(DPosition P)
 int main()
 {
     DList L = CreateDList();
+    InsertDList(30, DHeader(L), L);
+    InsertDList(20, DHeader(L), L);
     InsertDList(10, DHeader(L), L);
+    addDList(10, L);
     printf("%d\n", SizeDList(L));
     PrintDList("", L);
     return 0;

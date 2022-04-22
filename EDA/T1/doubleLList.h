@@ -19,7 +19,7 @@ int IsEmptyDList(DList L);
 void InsertDList(ElementType X, DPosition P, DList L);
 void InsertDListIth(ElementType X, int i, DList L);
 void addDList(ElementType X, DList L);
-DPosition FindDList(ElementType e);
+DPosition FindDList(ElementType e, DList L);
 void DeleteElement(ElementType e, DList L);
 ElementType RemoveElementAt(int i, DList L);
 DPosition Advance(DPosition P);
