@@ -5,9 +5,10 @@
 typedef int ElementType;
 
 struct DNode;
+struct DListStruct;
 typedef struct DNode *PtrToDNode;
 typedef PtrToDNode DPosition;
-typedef PtrToDNode DList;
+typedef struct DListStruct *DList;
 
 DList CreateDList();
 void MakeEmptyDList( DList L);
@@ -15,7 +16,7 @@ int SizeDList(DList L);
 DPosition DHeader(DList L);
 DPosition DFooter(DList L);
 int IsEmptyDList(DList L);
-void InsertDList(ElementType X, DPosition P);
+void InsertDList(ElementType X, DPosition P, DList L);
 void InsertDListIth(ElementType X, int i, DList L);
 void addDList(ElementType X, DList L);
 DPosition FindDList(ElementType e);

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "doubleLList.h"
+#include <stdlib.h>
 #include <stdbool.h>
 
 struct DNode
@@ -9,184 +10,85 @@ struct DNode
     DPosition Prev;
 };
 
-struct DNode *Head = NULL;
-
-struct DNode *Last = NULL;
-
-struct DNode *Current = NULL;
+struct DListStruct
+{
+    int size;
+    DPosition Head;
+    DPosition Tail;
+};
 
 DList CreateDList()
 {
     DList L;
-    if (L != NULL)
-        DeleteList(L);
-    L = malloc(sizeof(struct DNode));
-    if (L == NULL)
-        FatalError("Out of memory!");
-    L->Next = NULL;
-    L->Prev = NULL;
+    // if (L != NULL)
+    //   DeleteList(L);
+    L = malloc(sizeof(struct DListStruct));
+    // if (L == NULL)
+    // FatalError("Out of memory!");
+    L->Head = malloc(sizeof(struct DNode));
+    L->Tail = malloc(sizeof(struct DNode));
+    // Null
+    L->size = 0;
+    L->Head->Next = L->Tail;
+    L->Tail->Prev = L->Head;
     return L;
 }
 
-void MakeEmptyDList(DList L) // REVIEW
-{
-    DPosition P = L;
-    while (P != NULL)
-    {
-        Delete(P->Element, L);
-        P = P->Next;
-    }
+int SizeDList(DList L){
+    return L->size;
+}
+DPosition DHeader(DList L){
+    return L->Head;
+}
+DPosition DFooter(DList L){
+    return L->Tail;
 }
 
-int SizeDList(DList L)
+void InsertDList(ElementType X, DPosition P, DList L)
 {
-    int count = 0;
-    Current = Head;
-    while (Current != NULL)
-    {
-        count++;
-        Current = Current->Next;
-    }
-    return count;
+    DPosition RT = malloc(sizeof(struct DNode));
+
+    RT->Element = X;
+
+    RT->Next = P->Next;
+    RT->Prev = P;
+    P->Next->Prev = RT;
+    P->Next = RT;
+    L->size++; 
 }
 
-DPosition DHeader(DList L)
+void PrintDList(char *name, DList L)
 {
-    return Head;
+    printf("( ");
+    DPosition P = L->Head->Next;
+    while (P != L->Tail)
+    {
+        printf("%d ", Retrieve(P));
+        P = Advance(P);
+    }
+    printf(" )\n");
 }
 
-DPosition DFooter(DList L)
+ElementType Retrieve(DPosition P)
 {
-    return Last;
+    return P->Element;
 }
 
-int IsEmptyDList(DList L)
+DPosition Advance(DPosition P)
 {
-    if (DHeader == NULL)
-        return 1; // Verdade
-    return 0;     // Falso
+    return P->Next;
 }
 
-void InsertDList(ElementType X, DPosition P)
+DPosition Back(DPosition P)
 {
-    struct DNode *PJ = (struct DNode *)malloc(sizeof(struct DNode));
-    if (PJ == NULL)
-    {
-        FatalError("Out of space");
-    }
-
-    PJ->Element = X;
-
-    if (IsEmptyDList == 1)
-    {
-        Last = PJ;
-    }
-    else
-    {
-        Head->Prev = PJ;
-    }
-
-    PJ->Next = Head;
-
-    Head = PJ;
+    return P->Prev;
 }
 
-void InsertDListIth(ElementType X, int i, DList L)
+int main()
 {
-    struct DNode *ptr;
-    struct DNode *PI = (struct DNode *)malloc(sizeof(struct DNode));
-    if (PI == NULL)
-    {
-        FatalError("Out of space\n");
-    }
-
-    PI->Element = X;
-    PI->Next = NULL;
-    if (i == 0)
-    {
-        PI->Next = Head;
-        Head = PI;
-    }
-    else
-    {
-        ptr = Head;
-        for (int count = 0; count < i - 1; count++)
-        {
-            ptr = ptr->Next;
-            if (ptr == NULL)
-            {
-                FatalError("Position not found\n");
-            }
-        }
-
-        PI->Next = ptr->Next;
-        ptr->Next = PI;
-    }
-}
-
-void addDList(ElementType X, DList L)
-{
-    struct DNode *PT = (struct DNode *)malloc(sizeof(struct DNode));
-    PT->Element = X;
-
-    if (IsEmptyDList == 1)
-    {
-        Last = PT;
-    }
-    else
-    {
-        Last->Next = PT;
-        PT->Prev = Last;
-    }
-
-    Last = PT;
-}
-
-DPosition FindDList(ElementType e)
-{
-    struct DNode *ptr;
-    int i = 0;
-    bool flag;
-    ptr = Head;
-    if (ptr == NULL)
-    {
-        FatalError("Empty List\n");
-    }
-
-    while (ptr != NULL)
-    {
-        if (ptr->Element == e)
-        {
-            printf("Item found! Position: %d\n", i + 1);
-            flag = true;
-            break;
-        }
-        else
-        {
-            flag = false;
-        }
-        i++;
-        ptr = ptr->Next;
-    }
-
-    if (!flag)
-    {
-        printf("Item not found\n");
-    }
-}
-
-void DeleteElement(ElementType e, DList L){
-    DPosition F, F1, F2;
-
-    F = FindDList(e);
-    if (F == NULL){
-        F1 = F->Prev;
-        F2 = F->Next;
-        F1->Next = F->Next;
-
-        if(F2 == NULL)
-            F2->Prev = F->Prev;
-    }
-    else
-        FatalError("Item not found\n");
+    DList L = CreateDList();
+    InsertDList(10, DHeader(L), L);
+    printf("%d\n", SizeDList(L));
+    PrintDList("", L);
+    return 0;
 }
