@@ -70,7 +70,7 @@ void addDList(ElementType X, DList L)
     DPosition PJ = DFooter(L);
 
     PJ = PJ->Prev;
-   InsertDList(X, PJ, L);
+    InsertDList(X, PJ, L);
     L->size++;
 }
 
@@ -119,6 +119,19 @@ DPosition Advance(DPosition P)
 DPosition Back(DPosition P)
 {
     return P->Prev;
+}
+
+int IsEmptyDList(DList L)
+{
+    if (L->Head == NULL)
+        return 1;
+    else
+        return 0;
+}
+
+void DeleteElement(ElementType e, DList L)
+{
+    
 }
 
 int main()
