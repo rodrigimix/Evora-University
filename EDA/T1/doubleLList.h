@@ -10,21 +10,21 @@ typedef struct DNode *PtrToDNode;
 typedef PtrToDNode DPosition;
 typedef struct DListStruct *DList;
 
-DList CreateDList();
+DList CreateDList(); //DONE
 void MakeEmptyDList( DList L);
-int SizeDList(DList L);
-DPosition DHeader(DList L);
-DPosition DFooter(DList L);
-int IsEmptyDList(DList L);
-void InsertDList(ElementType X, DPosition P, DList L);
+int SizeDList(DList L); //DONE
+DPosition DHeader(DList L); //DONE
+DPosition DFooter(DList L); //DONE
+int IsEmptyDList(DList L); //DONE
+void InsertDList(ElementType X, DPosition P, DList L); //DONE
 void InsertDListIth(ElementType X, int i, DList L);
-void addDList(ElementType X, DList L);
-DPosition FindDList(ElementType e, DList L);
+void addDList(ElementType X, DList L); //DONE
+DPosition FindDList(ElementType e, DList L); //DONE
 void DeleteElement(ElementType e, DList L);
 ElementType RemoveElementAt(int i, DList L);
-DPosition Advance(DPosition P);
-DPosition Back(DPosition P);
-ElementType Retrieve(DPosition P);
-void PrintDList(char *name, DList L);
+DPosition Advance(DPosition P); //DONE
+DPosition Back(DPosition P); //DONE
+ElementType Retrieve(DPosition P); //DONE
+void PrintDList(char *name, DList L); //DONE
 
 #endif /* doubleLList_h */

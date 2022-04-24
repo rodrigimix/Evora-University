@@ -134,6 +134,16 @@ void DeleteElement(ElementType e, DList L)
     
 }
 
+void MakeEmptyDList(DList L)
+{
+    DPosition P = L;
+    while (P != NULL)
+    {
+        DeleteElement(P->Element, L);
+        P = P->Next;
+    }
+}
+
 int main()
 {
     DList L = CreateDList();
@@ -142,6 +152,8 @@ int main()
     InsertDList(10, DHeader(L), L);
     addDList(10, L);
     printf("%d\n", SizeDList(L));
+    PrintDList("", L);
+    MakeEmptyDList(L);
     PrintDList("", L);
     return 0;
 }
