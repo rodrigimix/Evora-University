@@ -6,3 +6,4 @@ bin:
 	mkdir $@
 clean:
 	rm -rf list bin
+
