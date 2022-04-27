@@ -78,7 +78,7 @@ DPosition FindDList(ElementType e, DList L)
 {
     DPosition P = DHeader(L);
 
-    if (P == NULL)
+    if (IsEmptyDList(L) == 1)
     {
         printf("Empty List");
         exit(1);
@@ -123,7 +123,7 @@ DPosition Back(DPosition P)
 
 int IsEmptyDList(DList L)
 {
-    if (L->Head == NULL)
+    if (L->Head->Next == L->Tail)
         return 1;
     else
         return 0;
@@ -131,29 +131,69 @@ int IsEmptyDList(DList L)
 
 void DeleteElement(ElementType e, DList L)
 {
-    
+    DPosition PJ;
+
+    PJ = FindDList(e, L);
+
+    if (PJ == DHeader(L))
+    {
+        L->Head = L->Head->Next;
+    }
+    else
+    {
+        PJ->Prev->Next = PJ->Next;
+    }
+    if (PJ == DFooter(L))
+    {
+        L->Tail = PJ->Prev;
+    }
+    else
+    {
+        PJ->Next->Prev = PJ->Prev;
+    }
+
+    L->size--;
+    free(PJ);
 }
 
 void MakeEmptyDList(DList L)
 {
-    DPosition P = L;
+    DPosition P;
+    P = L->Tail;
     while (P != NULL)
     {
+        if (IsEmptyDList(L) == 1)
+        {
+            break;
+        }
+
         DeleteElement(P->Element, L);
-        P = P->Next;
+        P = P->Prev;
     }
 }
 
 int main()
 {
     DList L = CreateDList();
-    InsertDList(30, DHeader(L), L);
-    InsertDList(20, DHeader(L), L);
-    InsertDList(10, DHeader(L), L);
-    addDList(10, L);
-    printf("%d\n", SizeDList(L));
+    printf("%d\n", IsEmptyDList(L));
     PrintDList("", L);
+    InsertDList(30, DHeader(L), L);
+    PrintDList("", L);
+    InsertDList(20, DHeader(L), L);
+    PrintDList("", L);
+    InsertDList(10, DHeader(L), L);
+    PrintDList("", L);
+    printf("%d\n", IsEmptyDList(L));
     MakeEmptyDList(L);
     PrintDList("", L);
+    DeleteElement(10, L);
+    PrintDList("", L);
+    DeleteElement(20, L);
+    PrintDList("", L);
+    DeleteElement(30, L);
+    PrintDList("", L);
+    printf("%d\n", SizeDList(L));
+    printf("%d\n", IsEmptyDList(L));
+
     return 0;
 }

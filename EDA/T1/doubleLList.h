@@ -11,7 +11,7 @@ typedef PtrToDNode DPosition;
 typedef struct DListStruct *DList;
 
 DList CreateDList(); //DONE
-void MakeEmptyDList( DList L);
+void MakeEmptyDList( DList L); //DONE
 int SizeDList(DList L); //DONE
 DPosition DHeader(DList L); //DONE
 DPosition DFooter(DList L); //DONE
