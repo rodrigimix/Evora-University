@@ -159,13 +159,8 @@ void MakeEmptyDList(DList L)
 {
     DPosition P;
     P = L->Tail;
-    while (P != NULL)
+    while (IsEmptyDList(L) != 1)
     {
-        if (IsEmptyDList(L) == 1)
-        {
-            break;
-        }
-
         DeleteElement(P->Element, L);
         P = P->Prev;
     }
