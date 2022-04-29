@@ -224,21 +224,3 @@ ElementType RemoveElementAt(int i, DList L)
     return 0;
 }
 
-int main()
-{
-    DList L = CreateDList();
-    printf("%d\n", IsEmptyDList(L));
-    PrintDList("", L);
-    InsertDList(30, DHeader(L), L);
-    PrintDList("", L);
-    InsertDList(20, DHeader(L), L);
-    PrintDList("", L);
-    InsertDList(10, DHeader(L), L);
-    PrintDList("", L);
-    MakeEmptyDList(L);
-    PrintDList("", L);
-    printf("%d\n", SizeDList(L));
-    printf("%d\n", IsEmptyDList(L));
-
-    return 0;
-}
