@@ -76,12 +76,6 @@ void addDList(ElementType X, DList L)
 DPosition FindDList(ElementType e, DList L)
 {
     DPosition P = DHeader(L);
-
-    if (IsEmptyDList(L) == 1)
-    {
-        printf("Empty List");
-        exit(1);
-    }
     while (P != L->Tail)
     {
         if (P->Element == e)
@@ -130,29 +124,30 @@ int IsEmptyDList(DList L)
 
 void DeleteElement(ElementType e, DList L)
 {
-    DPosition PJ;
+    DPosition PJ = FindDList(e, L);
 
-    PJ = FindDList(e, L);
+    if (PJ != NULL)
+    {
+        if (PJ == DHeader(L))
+        {
+            L->Head = L->Head->Next;
+        }
+        else
+        {
+            PJ->Prev->Next = PJ->Next;
+        }
+        if (PJ == DFooter(L))
+        {
+            L->Tail = PJ->Prev;
+        }
+        else
+        {
+            PJ->Next->Prev = PJ->Prev;
+        }
 
-    if (PJ == DHeader(L))
-    {
-        L->Head = L->Head->Next;
+        L->size--;
+        free(PJ);
     }
-    else
-    {
-        PJ->Prev->Next = PJ->Next;
-    }
-    if (PJ == DFooter(L))
-    {
-        L->Tail = PJ->Prev;
-    }
-    else
-    {
-        PJ->Next->Prev = PJ->Prev;
-    }
-
-    L->size--;
-    free(PJ);
 }
 
 void MakeEmptyDList(DList L)
@@ -213,7 +208,7 @@ ElementType RemoveElementAt(int i, DList L)
         {
             PR = PR->Next;
         }
-        
+
         ElementType a = PR->Element;
 
         DeleteElement(a, L);
@@ -223,4 +218,3 @@ ElementType RemoveElementAt(int i, DList L)
 
     return 0;
 }
-

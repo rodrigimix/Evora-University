@@ -13,7 +13,9 @@ int main()
     PrintDList("", L);
     InsertDList(10, DHeader(L), L);
     PrintDList("", L);
-    MakeEmptyDList(L);
+    DeleteElement(10, L);
+    PrintDList("", L);
+    DeleteElement(40, L);
     PrintDList("", L);
     printf("%d\n", SizeDList(L));
     printf("%d\n", IsEmptyDList(L));
