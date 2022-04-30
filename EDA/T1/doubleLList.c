@@ -20,14 +20,14 @@ struct DListStruct
 DList CreateDList()
 {
     DList L;
-    // if (L != NULL)
-    //   DeleteList(L);
     L = malloc(sizeof(struct DListStruct));
-    // if (L == NULL)
-    // FatalError("Out of memory!");
+    if (L == NULL)
+    {
+        printf("Out of space\n");
+        exit(1);
+    }
     L->Head = malloc(sizeof(struct DNode));
     L->Tail = malloc(sizeof(struct DNode));
-    // Null
     L->size = 0;
     L->Head->Next = L->Tail;
     L->Tail->Prev = L->Head;
@@ -54,15 +54,16 @@ void InsertDList(ElementType X, DPosition P, DList L)
     if (RT == NULL)
     {
         printf("Out of memory\n");
-        exit(1);
     }
-    RT->Element = X;
-
-    RT->Next = P->Next;
-    RT->Prev = P;
-    P->Next->Prev = RT;
-    P->Next = RT;
-    L->size++;
+    else
+    {
+        RT->Element = X;
+        RT->Next = P->Next;
+        RT->Prev = P;
+        P->Next->Prev = RT;
+        P->Next = RT;
+        L->size++;
+    }
 }
 
 void addDList(ElementType X, DList L)
