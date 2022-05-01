@@ -165,14 +165,14 @@ BigInt sub_b(BigInt a, BigInt b)
         {
             while (Pa != a->L->Head || Pb != b->L->Head)
             {
-                if (Retrieve(Pa) < Retrieve(Pb) && Retrieve(Pa) != 0)
+                if (Retrieve(Pa) > Retrieve(Pb) && Retrieve(Pa) != 0)
                 {
-                    num = Retrieve(Pb) - (10 + Retrieve(Pa)) + carry;
+                    num = (10 + Retrieve(Pb)) - Retrieve(Pa) + carry;
                     carry = 1;
                 }
                 else
                 {
-                    num = Retrieve(Pb) - Retrieve(Pa) - carry;
+                    num = Retrieve(Pb) - Retrieve(Pa) + carry;
                     carry = 0;
                 }
                 num = abs(num);
@@ -189,12 +189,12 @@ BigInt sub_b(BigInt a, BigInt b)
             {
                 if (Retrieve(Pa) < Retrieve(Pb) && Retrieve(Pa) != 0)
                 {
-                    num = (10 + Retrieve(Pa)) - Retrieve(Pb) - carry;
+                    num = (10 + Retrieve(Pa)) - Retrieve(Pb) + carry;
                     carry = 1;
                 }
                 else
                 {
-                    num = Retrieve(Pa) - Retrieve(Pb) - carry;
+                    num = Retrieve(Pa) - Retrieve(Pb) + carry;
                     carry = 0;
                 }
                 num = abs(num);
