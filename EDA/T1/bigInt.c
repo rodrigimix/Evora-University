@@ -26,7 +26,8 @@ struct BigInt
     int signbit;
 };
 
-BigInt big_new(char *num){
+BigInt big_new(char *num)
+{
     int t = 0;
     BigInt PJ = malloc(sizeof(struct BigInt));
     PJ->L = CreateDList();
@@ -40,24 +41,20 @@ BigInt big_new(char *num){
         PJ->signbit = 1;
     }
 
-    DPosition P = DHeader(PJ->L);
     for (int i = 0; i < strlen(num); i++)
     {
         if (num[i] == '-')
         {
             continue;
         }
-        
 
-        InsertDList((int) num[i]-48, P, PJ->L);
-        P = P->Next;
+        addDList((int)num[i] - 48, PJ->L);
     }
-
     return PJ;
-    
 }
 
-void print_b(BigInt a){
+void print_b(BigInt a)
+{
     int i;
     if (a->signbit == -1)
     {
@@ -65,4 +62,61 @@ void print_b(BigInt a){
     }
     PrintDList("", a->L);
     printf("\n");
+}
+
+BigInt sum_b(BigInt a, BigInt b)
+{
+    int carry = 0, num = 0;
+    BigInt sum = malloc(sizeof(struct BigInt));
+    sum->L = CreateDList();
+
+    if (a->L->size > b->L->size)
+    {
+        while (b->L->size < a->L->size)
+        {
+            addDList(0, b->L);
+        }
+    }
+    else
+    {
+        while (a->L->size < b->L->size)
+        {
+            addDList(0, a->L);
+        }
+    }
+    
+
+    if (b->signbit == -1 && a->signbit == 1 || a->signbit == -1 && b->signbit == 1)
+    {
+        //vai ao subtrair
+    }
+    else
+    {
+        DPosition Pa = a->L->Tail->Prev;
+        DPosition Pb = b->L->Tail->Prev;
+        while (Pa != a->L->Head->Next || Pb != b->L->Head->Next)
+        {
+            num = Retrieve(Pa) + Retrieve(Pb) + carry;
+
+            if (num >= 10)
+            {
+                num -= 10;
+                carry = 1;
+            }
+            else{
+                carry = 0;
+            }
+
+            InsertDList(num, DHeader(sum->L), sum->L);
+
+            Pa = Back(Pa);
+            Pb = Back(Pb);
+        }
+    }
+
+    if(a->signbit == -1 && b->signbit == -1){
+        sum->signbit = -1;
+    }
+
+    return sum;
 }
