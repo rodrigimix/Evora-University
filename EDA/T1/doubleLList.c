@@ -2,6 +2,7 @@
 #include "doubleLList.h"
 #include <stdlib.h>
 #include <stdbool.h>
+#include "bigInt.h"
 
 struct DNode
 {
