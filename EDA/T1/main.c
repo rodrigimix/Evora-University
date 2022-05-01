@@ -3,7 +3,7 @@
 #include "doubleLList.h"
 #include "bigInt.h"
 
-int main()
+int main(int argc, const char *argv[])
 {
     printf("Hello world\n");
     BigInt a = big_new("-1453778288677");
