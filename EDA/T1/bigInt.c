@@ -6,17 +6,31 @@
 
 #define Max 100
 
-struct BigInt
+struct DNode
 {
-    char digits[100];
-    int signbit;
-    int lastdigit;
+    ElementType Element;
+    DPosition Next;
+    DPosition Prev;
 };
 
-BigInt big_new(char *num)
+struct DListStruct
 {
+    int size;
+    DPosition Head;
+    DPosition Tail;
+};
+
+struct BigInt
+{
+    DList L;
+    int signbit;
+};
+
+BigInt big_new(char *num){
     int t = 0;
     BigInt PJ = malloc(sizeof(struct BigInt));
+    PJ->L = CreateDList();
+
     if (num[0] == '-')
     {
         PJ->signbit = -1;
@@ -26,28 +40,21 @@ BigInt big_new(char *num)
         PJ->signbit = 1;
     }
 
-    for (int i = 0; i < Max; i++)
+    DPosition P = DHeader(PJ->L);
+    for (int i = 0; i < strlen(num); i++)
     {
-        PJ->digits[i] = (char)0;
-    }
-
-    for (int x = 0; x <= strlen(num); x++)
-    {
-        if (num[x] == '-')
+        if (num[i] == '-')
         {
-            x++;
             continue;
         }
+        
 
-
-        PJ->digits[PJ->lastdigit] = num[strlen(num)-t];
-        t--;
+        InsertDList((int) num[i]-48, P, PJ->L);
+        P = P->Next;
     }
 
-    if(atoi(num) == 0){
-        PJ->lastdigit = 0;
-    }
     return PJ;
+    
 }
 
 void print_b(BigInt a){
@@ -56,9 +63,6 @@ void print_b(BigInt a){
     {
         printf("-");
     }
-    for (i= a->lastdigit; i >= 0; i--)
-    {
-        printf("%c", a->digits[i]);
-    }
+    PrintDList("", a->L);
     printf("\n");
 }

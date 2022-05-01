@@ -91,14 +91,12 @@ DPosition FindDList(ElementType e, DList L)
 
 void PrintDList(char *name, DList L)
 {
-    printf("( ");
     DPosition P = L->Head->Next;
     while (P != L->Tail)
     {
-        printf("%d ", Retrieve(P));
+        printf("%d", Retrieve(P));
         P = Advance(P);
     }
-    printf(" )\n");
 }
 
 ElementType Retrieve(DPosition P)
