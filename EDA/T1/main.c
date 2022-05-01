@@ -8,6 +8,8 @@ int main(int argc, const char *argv[])
     printf("Hello world\n");
     BigInt a = big_new("-1453778288677");
     BigInt b = big_new("8983885199936628789819168712");
+    //BigInt a = big_new("-936");
+    //BigInt b = big_new("677");
     printf("a = ");
     print_b(a);
     printf("b = ");

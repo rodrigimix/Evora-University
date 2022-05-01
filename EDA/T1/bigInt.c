@@ -6,8 +6,6 @@
 
 int op = 0;
 
-int size_b = 0;
-
 struct DNode
 {
     ElementType Element;
@@ -132,13 +130,13 @@ BigInt sum_b(BigInt a, BigInt b)
 
 BigInt sub_b(BigInt a, BigInt b)
 {
-    int carry = 0, num = 0;
+    int carry = 0, num = 0, size_b = 0;
+    char carry_a[7], carry_b[7];
     BigInt sub = malloc(sizeof(struct BigInt));
     sub->L = CreateDList();
 
     if (a->L->size > b->L->size)
     {
-        size_b = 0;
         while (b->L->size < a->L->size)
         {
             addDList(0, b->L);
@@ -162,41 +160,65 @@ BigInt sub_b(BigInt a, BigInt b)
     {
         DPosition Pa = a->L->Tail->Prev;
         DPosition Pb = b->L->Tail->Prev;
-        while (Pa != a->L->Head || Pb != b->L->Head)
+
+        if (a->signbit == -1 && b->signbit == 1)
         {
-            num = Retrieve(Pa) - Retrieve(Pb) - carry;
-
-            num = abs(num);
-
-            if (num >= 10)
+            while (Pa != a->L->Head || Pb != b->L->Head)
             {
-                num -= 10;
-                carry = 1;
+                if (Retrieve(Pa) < Retrieve(Pb) && Retrieve(Pa) != 0)
+                {
+                    num = Retrieve(Pb) - (10 + Retrieve(Pa)) + carry;
+                    carry = 1;
+                }
+                else
+                {
+                    num = Retrieve(Pb) - Retrieve(Pa) - carry;
+                    carry = 0;
+                }
+                num = abs(num);
+
+                InsertDList(num, DHeader(sub->L), sub->L);
+
+                Pa = Back(Pa);
+                Pb = Back(Pb);
             }
-            else
-            {
-                carry = 0;
-            }
-
-            InsertDList(num, DHeader(sub->L), sub->L);
-
-            Pa = Back(Pa);
-            Pb = Back(Pb);
-        }
-
-        if (carry == 1)
-        {
-            InsertDList(carry, DHeader(sub->L), sub->L);
-        }
-
-        if (size_b == 1 && b->signbit == -1 && op != 1)
-        {
-            sub->signbit = 1;
         }
         else
         {
-            sub->signbit = -1;
+            while (Pa != a->L->Head || Pb != b->L->Head)
+            {
+                if (Retrieve(Pa) < Retrieve(Pb) && Retrieve(Pa) != 0)
+                {
+                    num = (10 + Retrieve(Pa)) - Retrieve(Pb) - carry;
+                    carry = 1;
+                }
+                else
+                {
+                    num = Retrieve(Pa) - Retrieve(Pb) - carry;
+                    carry = 0;
+                }
+                num = abs(num);
+
+                InsertDList(num, DHeader(sub->L), sub->L);
+
+                Pa = Back(Pa);
+                Pb = Back(Pb);
+            }
         }
-        return sub;
-    }
+
+            if (carry == 1)
+            {
+                InsertDList(carry, DHeader(sub->L), sub->L);
+            }
+
+            if (size_b == 1 && b->signbit == -1 && op != 1)
+            {
+                sub->signbit = 1;
+            }
+            else
+            {
+                sub->signbit = -1;
+            }
+            return sub;
+        }
 }
