@@ -161,7 +161,7 @@ BigInt sub_b(BigInt a, BigInt b)
         DPosition Pa = a->L->Tail->Prev;
         DPosition Pb = b->L->Tail->Prev;
 
-        if (a->signbit == -1 && b->signbit == 1)
+        if ((a->signbit == -1 && b->signbit == 1) || (a->signbit == -1 && b->signbit == -1))
         {
             while (Pa != a->L->Head || Pb != b->L->Head)
             {
