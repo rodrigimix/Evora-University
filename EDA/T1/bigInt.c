@@ -130,7 +130,7 @@ BigInt sum_b(BigInt a, BigInt b)
 
 BigInt sub_b(BigInt a, BigInt b)
 {
-    int carry = 0, num = 0, size_b = 0, max=0;
+    int carry = 0, num = 0, max = 0;
     char carry_a[7], carry_b[7];
     BigInt sub = malloc(sizeof(struct BigInt));
     sub->L = CreateDList();
@@ -144,7 +144,6 @@ BigInt sub_b(BigInt a, BigInt b)
     }
     else
     {
-        size_b = 1;
         while (a->L->size < b->L->size)
         {
             InsertDList(0, DHeader(a->L), a->L);
@@ -166,8 +165,8 @@ BigInt sub_b(BigInt a, BigInt b)
             max = 1;
             count = 1;
         }
-            Ra = Ra->Next;
-            Rb = Rb->Next;
+        Ra = Ra->Next;
+        Rb = Rb->Next;
     }
 
     printf("%d\n", max);
@@ -175,6 +174,11 @@ BigInt sub_b(BigInt a, BigInt b)
     if ((a->signbit == 1 && b->signbit == -1 || a->signbit == -1 && b->signbit == 1) && op != 1)
     {
         op = 2;
+        if (a->signbit == -1 && b->signbit == 1)
+        {
+            b->signbit = -1;
+        }
+        
         return sum_b(a, b);
     }
     else
@@ -182,18 +186,18 @@ BigInt sub_b(BigInt a, BigInt b)
         DPosition Pa = a->L->Tail->Prev;
         DPosition Pb = b->L->Tail->Prev;
 
-        if ((a->signbit == -1 && b->signbit == 1) || (a->signbit == -1 && b->signbit == -1) || max == 1)
+        if ((a->signbit == -1 && b->signbit == 1) || (a->signbit == -1 && b->signbit == -1) && max == 1)
         {
             while (Pa != a->L->Head || Pb != b->L->Head)
             {
                 if (Retrieve(Pa) > Retrieve(Pb) && Retrieve(Pa) != 0)
                 {
-                    num = (10 + (Retrieve(Pb)-carry)) - Retrieve(Pa);
+                    num = (10 + (Retrieve(Pb) - carry)) - Retrieve(Pa);
                     carry = 1;
                 }
                 else
                 {
-                    num = (Retrieve(Pb)-carry) - Retrieve(Pa);
+                    num = (Retrieve(Pb) - carry) - Retrieve(Pa);
                     carry = 0;
                 }
                 num = abs(num);
@@ -210,12 +214,12 @@ BigInt sub_b(BigInt a, BigInt b)
             {
                 if (Retrieve(Pa) < Retrieve(Pb) && Retrieve(Pa) != 0)
                 {
-                    num = (10 + (Retrieve(Pa)-carry)) - Retrieve(Pb);
+                    num = (10 + (Retrieve(Pa) - carry)) - Retrieve(Pb);
                     carry = 1;
                 }
                 else
                 {
-                    num = (Retrieve(Pa)-carry) - Retrieve(Pb);
+                    num = (Retrieve(Pa) - carry) - Retrieve(Pb);
                     carry = 0;
                 }
                 num = abs(num);
@@ -227,21 +231,21 @@ BigInt sub_b(BigInt a, BigInt b)
             }
         }
 
-            if (carry == 1)
-            {
-                InsertDList(carry, DHeader(sub->L), sub->L);
-            }
-
-            if ((size_b == 1 && b->signbit == 1) || op != 1 && max == 0)
-            {
-                sub->signbit = 1;
-            }
-            else
-            {
-                sub->signbit = -1;
-            }
-            return sub;
+        if (carry == 1)
+        {
+            InsertDList(carry, DHeader(sub->L), sub->L);
         }
+
+        if (((a->signbit == 1 && b->signbit == 1) || ((a->signbit == -1 && b->signbit == -1) && max == 1)) && op != 1)
+        {
+            sub->signbit = 1;
+        }
+        else
+        {
+            sub->signbit = -1;
+        }
+        return sub;
+    }
 }
 
 /*BigInt mult_b(BigInt a, BigInt b){
@@ -283,11 +287,11 @@ BigInt sub_b(BigInt a, BigInt b)
         for (count = 0; count <= a->L->size ; count++)
         {
             Back(Px);
-            BigInt num1 = sum_b() 
+            BigInt num1 = sum_b()
         }
-        
+
 
 
     }
-    
+
 }*/
