@@ -222,3 +222,51 @@ BigInt sub_b(BigInt a, BigInt b)
             return sub;
         }
 }
+
+/*BigInt mult_b(BigInt a, BigInt b){
+    int count = 1, num = 0, carry = 0;
+    BigInt mul = malloc(sizeof(struct BigInt));
+    BigInt aux = malloc(sizeof(struct BigInt));
+    aux->L = CreateDList();
+    mul->L = CreateDList();
+    if (a->L->size < b->L->size)
+    {
+        DPosition Pa = a->L->Tail->Prev;
+        DPosition Pb = b->L->Tail->Prev;
+        while ((Pa != a->L->Head || Pb != b->L->Head) && (count <= a->L->size))
+        {
+            num = (Retrieve(Pb) + carry) * Retrieve(Pa);
+
+            if (num >= 10)
+            {
+                num -= 10;
+                carry = 1;
+            }
+            else{
+                carry = 0;
+            }
+
+            InsertDList(num, DHeader(aux->L), aux->L);
+
+            if (Pb == b->L->Head){
+                count++;
+                Back(Pa);
+                Pb = b->L->Tail->Prev;
+            }
+
+            Back(Pb);
+        }
+
+        DPosition Px = aux->L->Tail->Prev
+        InsertDList(Retrieve(aux->L->Tail->Prev), DHeader(mul->L), mul->L);
+        for (count = 0; count <= a->L->size ; count++)
+        {
+            Back(Px);
+            BigInt num1 = sum_b() 
+        }
+        
+
+
+    }
+    
+}*/
