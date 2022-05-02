@@ -131,7 +131,6 @@ BigInt sum_b(BigInt a, BigInt b)
 BigInt sub_b(BigInt a, BigInt b)
 {
     int carry = 0, num = 0, max = 0;
-    char carry_a[7], carry_b[7];
     BigInt sub = malloc(sizeof(struct BigInt));
     sub->L = CreateDList();
 
