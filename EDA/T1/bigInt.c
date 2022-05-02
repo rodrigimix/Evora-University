@@ -152,8 +152,8 @@ BigInt sub_b(BigInt a, BigInt b)
     }
 
     int count = 0;
-    DPosition Ra = a->L->Head;
-    DPosition Rb = b->L->Head;
+    DPosition Ra = a->L->Head->Next;
+    DPosition Rb = b->L->Head->Next;
     while (count != 1 || Ra == DFooter(a->L) || Rb == DFooter(b->L))
     {
         if (Retrieve(Ra) > Retrieve(Rb))
@@ -166,10 +166,11 @@ BigInt sub_b(BigInt a, BigInt b)
             max = 1;
             count = 1;
         }
-            Advance(Ra);
-            Advance(Rb);
+            Ra = Ra->Next;
+            Rb = Rb->Next;
     }
-    
+
+    printf("%d\n", max);
 
     if ((a->signbit == 1 && b->signbit == -1 || a->signbit == -1 && b->signbit == 1) && op != 1)
     {
@@ -209,12 +210,12 @@ BigInt sub_b(BigInt a, BigInt b)
             {
                 if (Retrieve(Pa) < Retrieve(Pb) && Retrieve(Pa) != 0)
                 {
-                    num = (10 + Retrieve(Pa)) - Retrieve(Pb) + carry;
+                    num = (10 + (Retrieve(Pa)-carry)) - Retrieve(Pb);
                     carry = 1;
                 }
                 else
                 {
-                    num = Retrieve(Pa) - Retrieve(Pb) + carry;
+                    num = (Retrieve(Pa)-carry) - Retrieve(Pb);
                     carry = 0;
                 }
                 num = abs(num);
@@ -231,7 +232,7 @@ BigInt sub_b(BigInt a, BigInt b)
                 InsertDList(carry, DHeader(sub->L), sub->L);
             }
 
-            if (size_b == 1 && b->signbit == -1 && op != 1)
+            if ((size_b == 1 && b->signbit == 1) || op != 1 && max == 0)
             {
                 sub->signbit = 1;
             }
