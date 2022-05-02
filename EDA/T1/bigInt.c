@@ -74,14 +74,14 @@ BigInt sum_b(BigInt a, BigInt b)
     {
         while (b->L->size < a->L->size)
         {
-            addDList(0, b->L);
+            InsertDList(0, DHeader(b->L), b->L);
         }
     }
     else
     {
         while (a->L->size < b->L->size)
         {
-            addDList(0, a->L);
+            InsertDList(0, DHeader(a->L), a->L);
         }
     }
 
@@ -139,7 +139,7 @@ BigInt sub_b(BigInt a, BigInt b)
     {
         while (b->L->size < a->L->size)
         {
-            addDList(0, b->L);
+            InsertDList(0, DHeader(b->L), b->L);
         }
     }
     else
@@ -147,7 +147,7 @@ BigInt sub_b(BigInt a, BigInt b)
         size_b = 1;
         while (a->L->size < b->L->size)
         {
-            addDList(0, a->L);
+            InsertDList(0, DHeader(a->L), a->L);
         }
     }
 
