@@ -70,7 +70,7 @@ BigInt sum_b(BigInt a, BigInt b)
     BigInt sum = malloc(sizeof(struct BigInt));
     sum->L = CreateDList();
 
-    Zero(a,b);
+    Zero(a, b);
 
     if ((b->signbit == -1 && a->signbit == 1 || a->signbit == -1 && b->signbit == 1) && op != 2)
     {
@@ -121,9 +121,9 @@ BigInt sub_b(BigInt a, BigInt b)
     BigInt sub = malloc(sizeof(struct BigInt));
     sub->L = CreateDList();
 
-    Zero(a,b);
+    Zero(a, b);
 
-    max = Max(a,b);
+    max = Max(a, b);
 
     printf("%d\n", max);
 
@@ -134,7 +134,7 @@ BigInt sub_b(BigInt a, BigInt b)
         {
             b->signbit = -1;
         }
-        
+
         return sum_b(a, b);
     }
     else
@@ -204,9 +204,10 @@ BigInt sub_b(BigInt a, BigInt b)
     }
 }
 
-void Zero(BigInt a, BigInt b){
-        
-        if (a->L->size > b->L->size)
+void Zero(BigInt a, BigInt b)
+{
+
+    if (a->L->size > b->L->size)
     {
         while (b->L->size < a->L->size)
         {
@@ -222,7 +223,8 @@ void Zero(BigInt a, BigInt b){
     }
 }
 
-int Max(BigInt a, BigInt b){
+int Max(BigInt a, BigInt b)
+{
     int max = 0;
     int count = 0;
     DPosition Ra = a->L->Head->Next;
@@ -246,13 +248,94 @@ int Max(BigInt a, BigInt b){
     return max;
 }
 
-BigInt mult_b(BigInt a, BigInt b){
-    int count = 1, num = 0, carry = 0, max = 0;
+BigInt mult_b(BigInt a, BigInt b)
+{
+    int count = 1, num = 0, carry = 0, max = 0, ct, num1 = 0, n = 0, l = 0, c = 0;
     BigInt mul = malloc(sizeof(struct BigInt));
     mul->L = CreateDList();
 
-    if (max == 0){
-        
-    }
+    if (max == 0)
+    {
+        ct = a->L->size;
+        int ar[ct][ct];
+        DPosition Pa = a->L->Tail->Prev;
+        DPosition Pb = b->L->Tail->Prev;
 
-}
+        while (Pb != b->L->Head)
+        {
+            if (Retrieve(a->L) + carry >= 10) // Se fosse 9 *9 com carry 8 e depois fica 9+8 = 17
+            {
+                while (carry != 0)
+                {
+                    num = Retrieve(a->L) + carry;
+                    carry = num / 10;
+                    num -= (carry * 10);
+                    RemoveElementAt(ct,a->L);
+                    InsertDListIth(num, ct, a->L);
+                    Back(Pa);
+                    num1 = Retrieve(Pa) + carry;
+                    RemoveElementAt(ct--, a->L);
+                    InsertDListIth(num1, ct-1, a->L);
+                    n++;
+                }
+                while (n <= 0){
+                    Advance(Pa);
+                    ct++;
+                    n--;
+                }
+            }
+
+            num = (Retrieve(a->L) + carry) * Retrieve(b->L);
+
+            if (num >= 10)
+            {
+                carry = num / 10;
+                num -= (carry * 10);
+            }
+            else
+            {
+                carry = 0;
+            }
+
+            ar[l][c] = num;
+
+            if (Pa = a->L->Tail)
+            {
+                Pa = a->L->Tail->Prev;
+                Back(Pb);
+                l++;
+                c = l;
+                ct--;
+            }
+
+            Back(Pa);
+            c++;
+            ct--;
+        }
+
+        c = 0;
+        l = 0;
+        ct = 0;
+        num = 0;
+        while(c != a->L->size && ar[l][c] != '\0'){
+
+            while (ct != 1)
+            {
+                if (ar[l+1][c] != '\0')
+                {
+                    num = num +(ar[l][c] + ar[l+1][c]);
+                }
+                else
+                {
+                    if (ar[l][c] == '\n')
+                    {
+                        /* code */
+                    }
+                    
+                }
+                
+                
+            }
+            
+        }
+    }
