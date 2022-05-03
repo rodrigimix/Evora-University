@@ -142,7 +142,7 @@ BigInt sub_b(BigInt a, BigInt b)
         DPosition Pa = a->L->Tail->Prev;
         DPosition Pb = b->L->Tail->Prev;
 
-        if ((a->signbit == -1 && b->signbit == 1) || (a->signbit == -1 && b->signbit == -1) && max == 1)
+        if (((a->signbit == -1 && b->signbit == 1) || (a->signbit == -1 && b->signbit == -1)) && max == 1)
         {
             while (Pa != a->L->Head || Pb != b->L->Head)
             {
@@ -248,94 +248,102 @@ int Max(BigInt a, BigInt b)
     return max;
 }
 
-BigInt mult_b(BigInt a, BigInt b)
+/*BigInt mult_b(BigInt a, BigInt b)
 {
-    int count = 1, num = 0, carry = 0, max = 0, ct, num1 = 0, n = 0, l = 0, c = 0;
+    int count = 1, num = 0, carry = 0, max = 0, ct = 0, num1 = 0, n = 0, l = 0, c = 0;
     BigInt mul = malloc(sizeof(struct BigInt));
     mul->L = CreateDList();
 
+    DPosition Pa = a->L->Tail->Prev;
+    DPosition Pb = b->L->Tail->Prev;
+    max = Max(a, b);
     if (max == 0)
     {
+        printf("%d\n",max);
         ct = a->L->size;
-        int ar[ct][ct];
-        DPosition Pa = a->L->Tail->Prev;
-        DPosition Pb = b->L->Tail->Prev;
+        char ar[ct][ct];
+    }
 
-        while (Pb != b->L->Head)
+    while (Pb != b->L->Head)
+    {
+        if (Retrieve(Pa) + carry >= 10) // Se fosse 9 *9 com carry 8 e depois fica 9+8 = 17
         {
-            if (Retrieve(a->L) + carry >= 10) // Se fosse 9 *9 com carry 8 e depois fica 9+8 = 17
+            while (carry != 0)
             {
-                while (carry != 0)
-                {
-                    num = Retrieve(a->L) + carry;
-                    carry = num / 10;
-                    num -= (carry * 10);
-                    RemoveElementAt(ct,a->L);
-                    InsertDListIth(num, ct, a->L);
-                    Back(Pa);
-                    num1 = Retrieve(Pa) + carry;
-                    RemoveElementAt(ct--, a->L);
-                    InsertDListIth(num1, ct-1, a->L);
-                    n++;
-                }
-                while (n <= 0){
-                    Advance(Pa);
-                    ct++;
-                    n--;
-                }
-            }
-
-            num = (Retrieve(a->L) + carry) * Retrieve(b->L);
-
-            if (num >= 10)
-            {
+                num = Retrieve(Pa) + carry;
                 carry = num / 10;
                 num -= (carry * 10);
+                RemoveElementAt(ct, a->L);
+                InsertDListIth(num, ct, a->L);
+                Back(Pa);
+                num1 = Retrieve(Pa) + carry;
+                RemoveElementAt(ct--, a->L);
+                InsertDListIth(num1, ct - 1, a->L);
+                n++;
             }
-            else
+            while (n <= 0)
             {
-                carry = 0;
+                Advance(Pa);
+                ct++;
+                n--;
             }
+        }
 
-            ar[l][c] = num;
+        num = (Retrieve(Pa) + carry) * Retrieve(Pb);
 
-            if (Pa = a->L->Tail)
-            {
-                Pa = a->L->Tail->Prev;
-                Back(Pb);
-                l++;
-                c = l;
-                ct--;
-            }
+        if (num >= 10)
+        {
+            carry = num / 10;
+            num -= (carry * 10);
+        }
+        else
+        {
+            carry = 0;
+        }
 
-            Back(Pa);
-            c++;
+        ar[l][c] = num;
+
+        if (Pa = a->L->Tail)
+        {
+            Pa = a->L->Tail->Prev;
+            Back(Pb);
+            l++;
+            c = l;
             ct--;
         }
 
-        c = 0;
-        l = 0;
-        ct = 0;
-        num = 0;
-        while(c != a->L->size && ar[l][c] != '\0'){
-
-            while (ct != 1)
-            {
-                if (ar[l+1][c] != '\0')
-                {
-                    num = num +(ar[l][c] + ar[l+1][c]);
-                }
-                else
-                {
-                    if (ar[l][c] == '\n')
-                    {
-                        /* code */
-                    }
-                    
-                }
-                
-                
-            }
-            
-        }
+        Back(Pa);
+        c++;
+        ct--;
     }
+    /*
+    c = 0;
+    l = 0;
+    num = 0;
+    while(c != a->L->size && ar[l][c] != '\0'){
+        ct = 0;
+        if (ar[l][c] == '\0')
+        {
+            l++;
+        }
+        num = ar[l][c];
+        while (ct != 1)
+        {
+            if (ar[l+1][c] != '\0')
+            {
+                num += ar[l+1][c];
+            }
+            else
+            {
+                ct = 1;
+            }
+            l++;
+        }
+        InsertDList(num, DHeader(mul->L), mul->L);
+        l=0;
+        c++;
+    }
+}
+
+    return mul;
+}*/
