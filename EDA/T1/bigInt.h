@@ -17,7 +17,7 @@ typedef struct BigInt *BigInt;
 BigInt big_new(char *num);
 BigInt sum_b(BigInt a, BigInt b);
 BigInt sub_b(BigInt a, BigInt b);
-//BigInt mult_b(BigInt a, BigInt b);
+BigInt mult_b(BigInt a, BigInt b);
 void Zero(BigInt a, BigInt b);
 int Max(BigInt a, BigInt b);
 /*BigInt div_b(BigInt a, BigInt b);
