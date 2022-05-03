@@ -70,20 +70,7 @@ BigInt sum_b(BigInt a, BigInt b)
     BigInt sum = malloc(sizeof(struct BigInt));
     sum->L = CreateDList();
 
-    if (a->L->size > b->L->size)
-    {
-        while (b->L->size < a->L->size)
-        {
-            InsertDList(0, DHeader(b->L), b->L);
-        }
-    }
-    else
-    {
-        while (a->L->size < b->L->size)
-        {
-            InsertDList(0, DHeader(a->L), a->L);
-        }
-    }
+    Zero(a,b);
 
     if ((b->signbit == -1 && a->signbit == 1 || a->signbit == -1 && b->signbit == 1) && op != 2)
     {
@@ -134,39 +121,9 @@ BigInt sub_b(BigInt a, BigInt b)
     BigInt sub = malloc(sizeof(struct BigInt));
     sub->L = CreateDList();
 
-    if (a->L->size > b->L->size)
-    {
-        while (b->L->size < a->L->size)
-        {
-            InsertDList(0, DHeader(b->L), b->L);
-        }
-    }
-    else
-    {
-        while (a->L->size < b->L->size)
-        {
-            InsertDList(0, DHeader(a->L), a->L);
-        }
-    }
+    Zero(a,b);
 
-    int count = 0;
-    DPosition Ra = a->L->Head->Next;
-    DPosition Rb = b->L->Head->Next;
-    while (count != 1 || Ra == DFooter(a->L) || Rb == DFooter(b->L))
-    {
-        if (Retrieve(Ra) > Retrieve(Rb))
-        {
-            max = 0;
-            count = 1;
-        }
-        else if (Retrieve(Ra) < Retrieve(Rb))
-        {
-            max = 1;
-            count = 1;
-        }
-        Ra = Ra->Next;
-        Rb = Rb->Next;
-    }
+    max = Max(a,b);
 
     printf("%d\n", max);
 
@@ -235,7 +192,7 @@ BigInt sub_b(BigInt a, BigInt b)
             InsertDList(carry, DHeader(sub->L), sub->L);
         }
 
-        if (((a->signbit == 1 && b->signbit == 1) || ((a->signbit == -1 && b->signbit == -1) && max == 1)) && op != 1)
+        if (((a->signbit == 1 && b->signbit == 1) || ((a->signbit == -1 && b->signbit == -1) && max == 1) || ((a->signbit == -1 && b->signbit == 1) && max == 1)))
         {
             sub->signbit = 1;
         }
@@ -247,50 +204,55 @@ BigInt sub_b(BigInt a, BigInt b)
     }
 }
 
-/*BigInt mult_b(BigInt a, BigInt b){
-    int count = 1, num = 0, carry = 0;
-    BigInt mul = malloc(sizeof(struct BigInt));
-    BigInt aux = malloc(sizeof(struct BigInt));
-    aux->L = CreateDList();
-    mul->L = CreateDList();
-    if (a->L->size < b->L->size)
+void Zero(BigInt a, BigInt b){
+        
+        if (a->L->size > b->L->size)
     {
-        DPosition Pa = a->L->Tail->Prev;
-        DPosition Pb = b->L->Tail->Prev;
-        while ((Pa != a->L->Head || Pb != b->L->Head) && (count <= a->L->size))
+        while (b->L->size < a->L->size)
         {
-            num = (Retrieve(Pb) + carry) * Retrieve(Pa);
-
-            if (num >= 10)
-            {
-                num -= 10;
-                carry = 1;
-            }
-            else{
-                carry = 0;
-            }
-
-            InsertDList(num, DHeader(aux->L), aux->L);
-
-            if (Pb == b->L->Head){
-                count++;
-                Back(Pa);
-                Pb = b->L->Tail->Prev;
-            }
-
-            Back(Pb);
+            InsertDList(0, DHeader(b->L), b->L);
         }
-
-        DPosition Px = aux->L->Tail->Prev
-        InsertDList(Retrieve(aux->L->Tail->Prev), DHeader(mul->L), mul->L);
-        for (count = 0; count <= a->L->size ; count++)
+    }
+    else
+    {
+        while (a->L->size < b->L->size)
         {
-            Back(Px);
-            BigInt num1 = sum_b()
+            InsertDList(0, DHeader(a->L), a->L);
         }
+    }
+}
 
-
-
+int Max(BigInt a, BigInt b){
+    int max = 0;
+    int count = 0;
+    DPosition Ra = a->L->Head->Next;
+    DPosition Rb = b->L->Head->Next;
+    while (count != 1 || Ra == DFooter(a->L) || Rb == DFooter(b->L))
+    {
+        if (Retrieve(Ra) > Retrieve(Rb))
+        {
+            max = 0;
+            count = 1;
+        }
+        else if (Retrieve(Ra) < Retrieve(Rb))
+        {
+            max = 1;
+            count = 1;
+        }
+        Ra = Ra->Next;
+        Rb = Rb->Next;
     }
 
-}*/
+    return max;
+}
+
+BigInt mult_b(BigInt a, BigInt b){
+    int count = 1, num = 0, carry = 0, max = 0;
+    BigInt mul = malloc(sizeof(struct BigInt));
+    mul->L = CreateDList();
+
+    if (max == 0){
+        
+    }
+
+}
