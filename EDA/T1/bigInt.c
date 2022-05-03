@@ -260,10 +260,11 @@ BigInt mult_b(BigInt a, BigInt b)
     while (Pb != b->L->Head)
     {
         int c = 0, s = 0;
-        if (c != 0){
+        if (c != 0)
+        {
             InsertDList(c, DHeader(pro->L), pro->L);
         }
-         while (Pa != a->L->Head)
+        while (Pa != a->L->Head)
         {
             s = (Retrieve(Pa) * Retrieve(Pb) + c) % 10;
             c = (Retrieve(Pa) * Retrieve(Pb) + c) / 10;
@@ -286,9 +287,122 @@ BigInt mult_b(BigInt a, BigInt b)
     {
         mult->signbit = 1;
     }
-    else{
+    else
+    {
         mult->signbit = -1;
     }
-    
+
     return mult;
+}
+
+BigInt div_b(BigInt a, BigInt b)
+{
+    BigInt ex = big_new("");
+    BigInt mp = big_new("");
+    BigInt pr = big_new("");
+    BigInt div = big_new("");
+    int i;
+
+    for (i = 0; i < b->L->size; i++)
+    {
+        addDList(a->L->Head->Element, ex->L);
+        a->L->Head = a->L->Head->Next;
+    }
+
+    for (i = 0; i < 10; i++)
+    {
+        addDList(i, mp->L);
+        pr = mult_b(b, mp);
+        if (Max(ex, pr) == 1)
+            break;
+        pr->L->Head = NULL;
+        pr->L->Tail = NULL;
+        mp->L->Head = NULL;
+        mp->L->Tail = NULL;
+        mp->L->size = 0;
+        pr->L->size = 0;
+    }
+
+    pr->L->Head = NULL;
+    pr->L->Tail = NULL;
+    mp->L->Head = NULL;
+    mp->L->Tail = NULL;
+
+    mp->L->size = 0;
+    pr->L->size = 0;
+
+    addDList((i - 1), mp->L);
+    pr = mult_b(b, mp);
+    ex = sub_b(ex, pr);
+    addDList(i - 1, div->L);
+
+    pr->L->Head = NULL;
+    pr->L->Tail = NULL;
+    mp->L->Head = NULL;
+    mp->L->Tail = NULL;
+
+    mp->L->size = 0;
+    pr->L->size = 0;
+
+    while (a->L->Head != NULL)
+    {
+        addDList(a->L->Head->Element, ex->L);
+        while (ex->L->Head->Element == 0)
+        {
+            ex->L->Head = ex->L->Head->Next;
+            ex->L->size--;
+        }
+        for (i = 0; i < 10; i++)
+        {
+            addDList(i, mp->L);
+            pr = mult_b(b, mp);
+            if (Max(ex, pr) == 1)
+                break;
+            pr->L->Head = NULL;
+            pr->L->Tail = NULL;
+            mp->L->Head = NULL;
+            mp->L->Tail = NULL;
+
+            mp->L->size = 0;
+            pr->L->size = 0;
+        }
+
+        pr->L->Head = NULL;
+        pr->L->Tail = NULL;
+        mp->L->Head = NULL;
+        mp->L->Tail = NULL;
+
+        mp->L->size = 0;
+        pr->L->size = 0;
+
+        addDList((i - 1), mp->L);
+        pr = mult_b(b, mp);
+        ex = sub_b(ex, pr);
+        addDList(i - 1, div->L);
+
+        pr->L->Head = NULL;
+        pr->L->Tail = NULL;
+        mp->L->Head = NULL;
+        mp->L->Tail = NULL;
+
+        mp->L->size = 0;
+        pr->L->size = 0;
+
+        addDList(i - 1, div->L);
+
+        pr->L->Head = NULL;
+        pr->L->Tail = NULL;
+        mp->L->Head = NULL;
+        mp->L->Tail = NULL;
+
+        mp->L->size = 0;
+        pr->L->size = 0;
+
+        a->L->Head = a->L->Head->Next;
+        printf("Modulo:");
+        print_b(ex);
+        printf("\n");
+    }
+
+    return div;
 }

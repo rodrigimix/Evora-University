@@ -20,8 +20,8 @@ BigInt sub_b(BigInt a, BigInt b);
 BigInt mult_b(BigInt a, BigInt b);
 void Zero(BigInt a, BigInt b);
 int Max(BigInt a, BigInt b);
-/*BigInt div_b(BigInt a, BigInt b);
-BigInt mod_b(BigInt a, BigInt b);*/
+BigInt div_b(BigInt a, BigInt b);
+//BigInt mod_b(BigInt a, BigInt b);
 void print_b(BigInt a);
 
 
