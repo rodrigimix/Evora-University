@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/ximix/Faculdade'
+make: Leaving directory '/home/ximix/Faculdade'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
