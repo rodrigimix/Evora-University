@@ -146,11 +146,3 @@ void DestroyTable(LinHashTable H)
 void PrintTable(LinHashTable H)
 {
 }
-
-int main(){
-    int n;
-    printf("Digite numero: ");
-    scanf("%d", &n);
-    n = NextPrime(n);
-    printf("%d\n", n);
-}
