@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri May  6 10:04:03 2022
+# Make data base, printed on Sun Jul  3 17:58:26 2022
 
 # Variables
 
@@ -21,7 +21,7 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1358e72f-8509-4aad-b919-912bbe884cef.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-69d5dd90-59ac-4d2f-9ed7-25c76c0fb77e.sock
 # environment
 LC_NAME = pt_PT.UTF-8
 # environment
@@ -53,17 +53,17 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/ximix/.config/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
+VSCODE_CODE_CACHE_PATH = /home/ximix/.config/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.YTP2L1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.16A3O1
 # default
 .LOADED := 
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.114
+GNOME_TERMINAL_SERVICE = :1.468
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -71,7 +71,7 @@ CURDIR := /home/ximix/Faculdade
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # automatic
@@ -97,13 +97,13 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 3805
+VSCODE_PID = 257945
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/rodrigimix-pc:@/tmp/.ICE-unix/1955,unix/rodrigimix-pc:/tmp/.ICE-unix/1955
+SESSION_MANAGER = local/rodrigimix-pc:@/tmp/.ICE-unix/3901,unix/rodrigimix-pc:/tmp/.ICE-unix/3901
 # automatic
 *F = $(notdir $*)
 # environment
@@ -127,13 +127,13 @@ XMODIFIERS = @im=ibus
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/685d3483_2604_46c0_bad5_8260ac101aca
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/204e7cb2_3027_42ba_b0ce_15afbba9030a
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/ximix/.fzf/bin
 # default
 MAKEFILES := 
 # environment
@@ -171,7 +171,7 @@ LOGNAME = ximix
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 2502
+SYSTEMD_EXEC_PID = 4813
 # environment
 DISPLAY = :0
 # environment
@@ -203,7 +203,7 @@ QT_IM_MODULE = ibus
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-de896574-1.67.0-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-de896574-1.68.1-main.sock
 # environment
 TERM = xterm-256color
 # environment
@@ -237,9 +237,9 @@ LC_IDENTIFICATION = pt_PT.UTF-8
 
 # Directories
 
-# . (device 66306, inode 19008015): 9 files, no impossibilities.
+# . (device 66306, inode 19005697): 12 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 12 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -289,12 +289,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 17 / storage = 133 B / avg = 7 B
-# current buf: size = 8162 B / used = 133 B / count = 17 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 20 / storage = 252 B / avg = 12 B
+# current buf: size = 8162 B / used = 252 B / count = 20 / avg = 12 B
 
-# strcache performance: lookups = 20 / hit rate = 15%
+# strcache performance: lookups = 23 / hit rate = 13%
 # hash-table stats:
-# Load=17/8192=0%, Rehash=0, Collisions=0/20=0%
-# Finished Make data base on Fri May  6 10:04:03 2022
+# Load=20/8192=0%, Rehash=0, Collisions=0/23=0%
+# Finished Make data base on Sun Jul  3 17:58:26 2022
 
  
