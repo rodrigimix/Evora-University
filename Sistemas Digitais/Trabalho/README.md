@@ -1,5 +1,5 @@
-#Trabalho
+# Trabalho
 Trabalho final da cadeira Sistemas Digitais.
 
-#Nota
+# Nota
 14/20
