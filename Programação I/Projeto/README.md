@@ -32,6 +32,8 @@ Computer_play : DONE;
 
 Read_file : DONE;
 
+# Nota
+19/20
 # Autores
 
 Miguel Costa & Rodrigo Marques | Universidade de Évora
