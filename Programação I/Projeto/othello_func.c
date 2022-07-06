@@ -52,7 +52,7 @@ void print_board(char board[][9])
     int line, col;
 
     printf("\n   A  B  C  D  E  F  G  H\n"); // Este printf indica as coordenadas do lado da coluna do tabuleiro.
-    for (line = 1; line < 9; line++)
+    for (line = 0; line < 9; line++)
     {
         for (col = 0; col < 9; col++)
         {
@@ -75,7 +75,7 @@ void print_board(char board[][9])
 # valid, inteiro
 ###############################################################################################################
 */
-int verify(char board[][9], char color, int check[9])
+int verify(char board[][9], char color, int check[8])
 {
     int valid = 1; // Inicializa-se com valid=1 para mostrar que no fim da análise de jogadas possíveis, se a analise demonstrar que não existe jogadas possiveis, retorna para a função game, 1, que obriga o game dar a vez à peça oposta. 
     for (int line = 1; line < 9; line++)
@@ -103,7 +103,7 @@ int verify(char board[][9], char color, int check[9])
 # player - vetor que guarda as peças correspondentes ao jogador/computador, caractere
 #########################################################################################################################
 */
-void next_move(char board[][9], char color, int check[9], int score[2], char player[2])
+void next_move(char board[][9], char color, int check[8], int score[2], char player[2])
 {
     int line, col;
     choose(&line, &col, color); //Esta função é usada para obter a linha e a coluna que o utilizador decidiu escolher.
@@ -127,7 +127,7 @@ void next_move(char board[][9], char color, int check[9], int score[2], char pla
 # player - vetor que guarda as peças correspondentes ao jogador/computador, caractere
 ##############################################################################################
 */
-void wrong_play(char board[][9], char color, int check[9], int score[2], char player[2])
+void wrong_play(char board[][9], char color, int check[8], int score[2], char player[2])
 {
     printf("\nInvalid Move!\n"); //Este printf avisa ao utilizador que fez uma jogada incorreta
     next_move(board, color, check, score, player); //Para remendar a jogada do utilizador, chama-se a função next_move para dar outra oportunidade ao utilizador fazer uma jogada diferente mas válida.
@@ -147,7 +147,7 @@ void wrong_play(char board[][9], char color, int check[9], int score[2], char pl
 # binário (0/1), inteiro
 ##############################################################################################
 */
-int flanked(char board[][9], int line, int col, char color, int check[9])
+int flanked(char board[][9], int line, int col, char color, int check[8])
 {
     int scan = 0, d_line = 0, d_col = 0, count = 0, n = 0;
 
@@ -207,7 +207,7 @@ int flanked(char board[][9], int line, int col, char color, int check[9])
 # player - vetor que guarda as peças correspondentes ao jogador/computador, caractere
 ##########################################################################################################
 */
-void play(char board[][9], int line, int col, char color, int check[9], int score[2], char player[2])
+void play(char board[][9], int line, int col, char color, int check[8], int score[2], char player[2])
 {
     int d_line = 0, d_col = 0, sp = 0, n = 0;
 
@@ -361,7 +361,7 @@ char ra()
 # player - vetor que guarda as peças correspondentes ao jogador/computador, caractere
 #################################################################################################
 */
-void computer_play(char board[][9], char color, int check[9], int score[2], char player[2])
+void computer_play(char board[][9], char color, int check[8], int score[2], char player[2])
 {
     int b_l, b_c, sc, bs = 1, n = 0; // bs(best_score) = 1, para chegar esta função, teve que ser analisada antes para verificar se o computador tem jogadas possiveis, e como esta função é chamada porque existe jogadas válidas, o bs é colocado 1 como standard que existe jogadas possiveis.  
     char letter;
@@ -441,7 +441,7 @@ void winner(int score[2], char player[2])
 # ('x' ou 'o'), caractere
 ########################################################################################
 */
-char load_game(int argc, char *argv[], FILE *f, char color, char board[][9], int check[9], int score[2], char player[2])
+char load_game(int argc, char *argv[], FILE *f, char color, char board[][9], int check[8], int score[2], char player[2])
 {
     char c;
     int line = 0, col = 0, count = 1; // Count = 1, corresponde ao caractere 'x'. 
@@ -518,7 +518,7 @@ void save_player(char color, char player[2])
 # player - vetor que guarda as peças correspondentes ao jogador/computador, caractere
 ########################################################################################
 */
-void game(char board[][9], int check[9], char color, int score[2], char player[2])
+void game(char board[][9], int check[8], char color, int score[2], char player[2])
 {
     int end_of_match = 0, skip_turn = 0;
     while (end_of_match == 0) // Enquando o end_of_match for igual a 0, procede o jogo. Se o end_of_match for igual a 1, terminha o loop e encerra o codigo.

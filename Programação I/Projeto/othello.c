@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     FILE *f; // É uma variavel local chamada f (do tipo FILE) que tem a função mais tarde de abrir o ficheiro "jogadas.txt" e manipular esse ficheiro.
     char board[9][9], color, player[2]; // Declaração do tabuleiro; da cor da peça;  um vetor que guarda a cor da peça e corresponde um certo jogador.
-    int check[9], score[2]; // Declaração do vetor check (guarda a direção de uma jogada expecifica, 8 - significa 8 diferemtes direções, sejam diagonais, horizontais ou verticais.) Declaração do vetor score (guarda a pontuação (nº peças) dos jogadores).
+    int check[8], score[2]; // Declaração do vetor check (guarda a direção de uma jogada expecifica, 8 - significa 8 diferemtes direções, sejam diagonais, horizontais ou verticais.) Declaração do vetor score (guarda a pontuação (nº peças) dos jogadores).
     init_board(board, score); // Esta função inicializa o tabuleiro (board)
     printf("\nOthello Game\n"); // Exibe no inicio o titulo do jogo.
     srand(time(NULL)); // Esta função é um gerador de números aleatórios com o número fornecido.
